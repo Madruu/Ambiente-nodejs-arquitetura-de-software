@@ -1,0 +1,66 @@
+STATE:
+
+O padrão State permite que um objeto altere seu comportamento quando seu estado interno muda. O objeto parecerá mudar sua classe.
+
+Exemplo: Máquina de Venda Automática
+Contexto: VendingMachine
+Estados: NoCoinState, HasCoinState, SoldState, SoldOutState
++-------------------+
+|   VendingMachine  |
++-------------------+
+| - state: State    |
++-------------------+
+| + insertCoin()    |
+| + ejectCoin()     |
+| + pressButton()   |
+| + dispense()      |
++-------------------+
+         |
+         v
++-------------------+
+|      State        |
++-------------------+
+| + insertCoin()    |
+| + ejectCoin()     |
+| + pressButton()   |
+| + dispense()      |
++-------------------+
+         |
+         v
++-------------------+     +-------------------+     +-------------------+     +-------------------+
+|  NoCoinState      |     |  HasCoinState     |     |  SoldState        |     |  SoldOutState     |
++-------------------+     +-------------------+     +-------------------+     +-------------------+
+| + insertCoin()    |     | + ejectCoin()     |     | + dispense()      |     | + insertCoin()    |
+| + ejectCoin()     |     | + pressButton()   |     |                   |     | + ejectCoin()     |
+| + pressButton()   |     |                   |     |                   |     | + pressButton()   |
+| + dispense()      |     |                   |     |                   |     | + dispense()      |
++-------------------+     +-------------------+     +-------------------+     +-------------------+
+
+STRATEGY:
+O padrão Strategy define uma família de algoritmos, encapsula cada um deles e os torna intercambiáveis. O Strategy permite que o algoritmo varie independentemente dos clientes que o utilizam.
+
+Exemplo: Sistema de Pagamento
+Contexto: PaymentContext
+Estratégias: CreditCardStrategy, PayPalStrategy
++-------------------+
+|  PaymentContext   |
++-------------------+
+| - strategy: PaymentStrategy |
++-------------------+
+| + setStrategy()   |
+| + pay()           |
++-------------------+
+         |
+         v
++-------------------+
+| PaymentStrategy   |
++-------------------+
+| + pay(amount)     |
++-------------------+
+         |
+         v
++-------------------+     +-------------------+
+| CreditCardStrategy|     | PayPalStrategy    |
++-------------------+     +-------------------+
+| + pay(amount)     |     | + pay(amount)     |
++-------------------+     +-------------------+
